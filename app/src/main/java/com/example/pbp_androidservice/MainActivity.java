@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        recyclerView = findViewById(R.id.recycler_view);
+        noMusicTextView = findViewById(R.id.tv_no_songs);
+
         // Read file in raw folder
         Field[] fields = R.raw.class.getFields();
 
@@ -64,8 +67,16 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Title: " + allMusic.get(j).getTitle());
             System.out.println("Duration: " + allMusic.get(j).getDuration());
         }
-
-
+//        test read
+        System.out.println("Title: " + allMusic.get(0).getTitle());
+        if (allMusic.size() == 0) {
+            noMusicTextView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            noMusicTextView.setVisibility(View.GONE);
+            recyclerView.setAdapter(new MusicListAdapter(allMusic,getApplicationContext()));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
         // Testing read metadata
 //        Uri mediaPath = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.a_unisono_1_stanza);
 //        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -83,12 +94,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 //        System.out.println("Testing");
 
-        recyclerView = findViewById(R.id.recycler_view);
-        noMusicTextView = findViewById(R.id.tv_no_songs);
-        if (!checkPermission()){
-            requestPermission();
-            return;
-        }
+
+
 //        String[] projection = {
 //                MediaStore.Audio.Media.TITLE,
 //                MediaStore.Audio.Media.DURATION,
@@ -99,13 +106,7 @@ public class MainActivity extends AppCompatActivity {
 //            AudioModel songData = new AudioModel(cursor.getString(0), cursor.getString(1), cursor.getString(2));
 //            songsList.add(songData);
 //        }
-        if (allMusic.size() == 0) {
-            noMusicTextView.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            noMusicTextView.setVisibility(View.GONE);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        }
+
     }
     boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
