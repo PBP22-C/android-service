@@ -60,10 +60,11 @@ public class MainActivity extends AppCompatActivity {
             allMusic.add(music);
         }
 
-        for (int j = 0; j < allMusic.size(); j++) {
-            System.out.println("Title: " + allMusic.get(j).getTitle());
-            System.out.println("Duration: " + allMusic.get(j).getDuration());
-        }
+        // Testing print out all music data
+//        for (int j = 0; j < allMusic.size(); j++) {
+//            System.out.println("Title: " + allMusic.get(j).getTitle());
+//            System.out.println("Duration: " + allMusic.get(j).getDuration());
+//        }
 
 
         // Testing read metadata
@@ -76,12 +77,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        TextView tv_music = findViewById(R.id.tv_music);
 //        tv_music.setText(title + " " + artist);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        System.out.println("Testing");
 
         recyclerView = findViewById(R.id.recycler_view);
         noMusicTextView = findViewById(R.id.tv_no_songs);
@@ -89,38 +84,35 @@ public class MainActivity extends AppCompatActivity {
             requestPermission();
             return;
         }
-//        String[] projection = {
-//                MediaStore.Audio.Media.TITLE,
-//                MediaStore.Audio.Media.DURATION,
-//                MediaStore.Audio.Media.DATA
-//        };
-//        Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
-//        while (cursor.moveToNext()) {
-//            AudioModel songData = new AudioModel(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-//            songsList.add(songData);
-//        }
+
         if (allMusic.size() == 0) {
+            System.out.println("test");
             noMusicTextView.setVisibility(View.VISIBLE);
         } else {
+            System.out.println("test2");
             recyclerView.setVisibility(View.VISIBLE);
             noMusicTextView.setVisibility(View.GONE);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
     }
+
+    @Override
+    protected void onResume() {
+
+    }
+
     boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(result== PackageManager.PERMISSION_GRANTED) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
     void requestPermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
             Toast.makeText(MainActivity.this, "Please allow permission in App Settings.", Toast.LENGTH_LONG).show();
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
     }
