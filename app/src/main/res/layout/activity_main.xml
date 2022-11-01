@@ -10,8 +10,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_title"
-        android:textColor="@color/black"
         android:text="SONGS"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -26,11 +24,20 @@
         android:layout_centerInParent="true"
         android:visibility="gone"/>
 
+    <TextView
+        android:id="@+id/tv_music"
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:padding="15dp"
+        android:translationY="100dp"
+        android:text="Testing"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/recycler_view"
-        android:layout_below="@id/tv_title"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>
