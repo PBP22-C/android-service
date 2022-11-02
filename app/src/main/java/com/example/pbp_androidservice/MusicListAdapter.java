@@ -1,5 +1,6 @@
 package com.example.pbp_androidservice;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,7 +31,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder( MusicListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(MusicListAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         MusicModel songData = songsList.get(position);
         holder.titleTextView.setText(songData.getTitle());
 
@@ -46,6 +47,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
                 //navigate to another acitivty
 
                 MyMediaPlayer.getInstance().reset();
+                MyMediaPlayer.previousIndex = MyMediaPlayer.currentIndex;
                 MyMediaPlayer.currentIndex = position;
                 Intent intent = new Intent(context,MusicPlayerActivity.class);
                 intent.putExtra("LIST",songsList);
