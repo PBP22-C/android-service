@@ -44,9 +44,9 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //navigate to another acitivty
+                //navigate to another activity
 
-                MyMediaPlayer.getInstance().reset();
+                MyMediaPlayer.createInstance().reset();
                 MyMediaPlayer.previousIndex = MyMediaPlayer.currentIndex;
                 MyMediaPlayer.currentIndex = position;
                 Intent intent = new Intent(context,MusicPlayerActivity.class);

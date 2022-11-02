@@ -22,7 +22,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageView pausePlay,nextBtn,previousBtn,musicIcon;
     ArrayList<MusicModel> songsList;
     MusicModel currentSong;
-    MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
+    MediaPlayer mediaPlayer = MyMediaPlayer.createInstance();
     int x=0;
 
     @Override

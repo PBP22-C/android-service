@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 public class MyMediaPlayer {
     static MediaPlayer instance;
 
-    public static MediaPlayer getInstance(){
+    public static MediaPlayer createInstance(){
         if(instance == null){
             instance = new MediaPlayer();
         }
