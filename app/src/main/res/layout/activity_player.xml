@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F50057"
+    android:background="#EC5252"
     tools:context=".MusicPlayerActivity">
 
     <TextView
@@ -18,9 +18,8 @@
         android:ellipsize="marquee"
         android:padding="20dp"
         android:singleLine="true"
-        android:text="Title of the song"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <ImageView
         android:layout_width="240dp"
@@ -29,7 +28,7 @@
         android:layout_centerHorizontal="true"
         android:padding="20dp"
         android:layout_above="@id/controls"
-        android:src="@drawable/music_icon_big"/>
+        android:src="@drawable/music_icon"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

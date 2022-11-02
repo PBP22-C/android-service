@@ -3,6 +3,7 @@ package com.example.pbp_androidservice;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_player);
 
         titleTv = findViewById(R.id.song_title);
@@ -55,7 +57,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                         pausePlay.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24);
                         musicIcon.setRotation(x++);
                     }else{
-                        pausePlay.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24);
+                        pausePlay.setImageResource(R.drawable.ic_baseline_play_circle_outline_24);
                         musicIcon.setRotation(0);
                     }
 
@@ -90,33 +92,26 @@ public class MusicPlayerActivity extends AppCompatActivity {
         currentSong = songsList.get(MyMediaPlayer.currentIndex);
 
         titleTv.setText(currentSong.getTitle());
-
         totalTimeTv.setText(convertToMMSS(currentSong.getDuration()));
-
         pausePlay.setOnClickListener(v-> pausePlay());
         nextBtn.setOnClickListener(v-> playNextSong());
         previousBtn.setOnClickListener(v-> playPreviousSong());
 
         playMusic();
-
-
     }
 
 
     private void playMusic(){
-
-        mediaPlayer.reset();
         try {
-            mediaPlayer.setDataSource(currentSong.getPath());
+            mediaPlayer.reset();
+            Log.i("", "playMusic: "+currentSong.getPath());
+            mediaPlayer.setDataSource(getApplicationContext(), Uri.parse(currentSong.getPath()));
             mediaPlayer.prepare();
             mediaPlayer.start();
-            seekBar.setProgress(0);
             seekBar.setMax(mediaPlayer.getDuration());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void playNextSong(){
