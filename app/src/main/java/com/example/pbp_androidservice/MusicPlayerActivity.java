@@ -50,6 +50,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
             public void run() {
                 if(mediaPlayer!=null){
                     seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    MyMediaPlayer.setLastPosition(mediaPlayer.getCurrentPosition());
                     currentTimeTv.setText(convertToMMSS(mediaPlayer.getCurrentPosition()+""));
 
                     if(mediaPlayer.isPlaying()){
@@ -86,12 +87,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        MyMediaPlayer.setLastPosition(mediaPlayer.getCurrentPosition());
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
@@ -107,7 +102,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         playMusic();
 
         if (MyMediaPlayer.currentIndex == MyMediaPlayer.previousIndex) {
-            mediaPlayer.seekTo(MyMediaPlayer.lastPosition);
+            mediaPlayer.seekTo(MyMediaPlayer.lastPosition + 100);
         } else {
             MyMediaPlayer.setLastPosition(0);
         }

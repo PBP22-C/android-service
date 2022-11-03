@@ -65,18 +65,5 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(new MusicListAdapter(songsList,getApplicationContext()));
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         }
-
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        // Stop music from playing if user clicked back button
-        if (MyMediaPlayer.instance != null) {
-            if (MyMediaPlayer.instance.isPlaying()) {
-                MyMediaPlayer.instance.stop();
-            }
-        }
     }
 }
