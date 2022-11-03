@@ -66,22 +66,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         }
 
-        // Testing print out all music data
-//        for (int j = 0; j < songsList.size(); j++) {
-//            System.out.println("Title: " + songsList.get(j).getTitle());
-//            System.out.println("Duration: " + songsList.get(j).getDuration());
-//        }
 
-        // Testing read metadata
-//        Uri mediaPath = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.a_unisono_1_stanza);
-//        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-//        mmr.setDataSource(this, mediaPath);
-//
-//        String title = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-//        String artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-//
-//        TextView tv_music = findViewById(R.id.tv_music);
-//        tv_music.setText(title + " " + artist);
     }
 
     @Override
@@ -92,22 +77,6 @@ public class MainActivity extends AppCompatActivity {
             if (MyMediaPlayer.instance.isPlaying()) {
                 MyMediaPlayer.instance.stop();
             }
-        }
-    }
-
-    boolean checkPermission(){
-        int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if(result== PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    void requestPermission(){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-            Toast.makeText(MainActivity.this, "Please allow permission in App Settings.", Toast.LENGTH_LONG).show();
-        } else {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
     }
 }
