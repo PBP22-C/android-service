@@ -84,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
 //        tv_music.setText(title + " " + artist);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        // Stop music from playing if user clicked back button
+        if (MyMediaPlayer.instance != null) {
+            if (MyMediaPlayer.instance.isPlaying()) {
+                MyMediaPlayer.instance.stop();
+            }
+        }
+    }
+
     boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(result== PackageManager.PERMISSION_GRANTED) {
