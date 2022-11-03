@@ -4,12 +4,17 @@ import android.media.MediaPlayer;
 
 public class MyMediaPlayer {
     static MediaPlayer instance;
+    static int lastPosition;
 
-    public static MediaPlayer getInstance(){
+    public static MediaPlayer createInstance(){
         if(instance == null){
             instance = new MediaPlayer();
         }
         return instance;
+    }
+
+    public static void setLastPosition(int pos) {
+        lastPosition = pos;
     }
 
     public static int currentIndex = -1;

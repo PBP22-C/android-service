@@ -22,7 +22,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageView pausePlay,nextBtn,previousBtn,musicIcon;
     ArrayList<MusicModel> songsList;
     MusicModel currentSong;
-    MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
+    MediaPlayer mediaPlayer = MyMediaPlayer.createInstance();
     int x=0;
 
     @Override
@@ -45,7 +45,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
         songsList = (ArrayList<MusicModel>) getIntent().getSerializableExtra("LIST");
 
         setResourcesWithMusic();
-
         MusicPlayerActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -84,13 +83,21 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyMediaPlayer.setLastPosition(mediaPlayer.getCurrentPosition());
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     void setResourcesWithMusic(){
         currentSong = songsList.get(MyMediaPlayer.currentIndex);
-
         titleTv.setText(currentSong.getTitle());
         totalTimeTv.setText(convertToMMSS(currentSong.getDuration()));
         pausePlay.setOnClickListener(v-> pausePlay());
@@ -98,6 +105,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
         previousBtn.setOnClickListener(v-> playPreviousSong());
 
         playMusic();
+
+        if (MyMediaPlayer.currentIndex == MyMediaPlayer.previousIndex) {
+            mediaPlayer.seekTo(MyMediaPlayer.lastPosition);
+        } else {
+            MyMediaPlayer.setLastPosition(0);
+        }
     }
 
 
